@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Document</title>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=fc5e6255-4d58-4b6b-b634-6f05474de249&lang=ru_RU" type="text/javascript">
+  </script>
   <style>
       body {
           margin: 0;
@@ -22,6 +24,7 @@
 
       .wtf {
           background: lightgray;
+          position: relative;
       }
 
       .header {
@@ -29,9 +32,10 @@
           width: 100%;
           top: 0;
           z-index: 1;
-          margin-bottom: 20%;
           border-bottom-left-radius: 16px;
           border-bottom-right-radius: 16px;
+          box-sizing: border-box;
+          height: 80px
       }
 
       .tipa-cian-header {
@@ -40,6 +44,14 @@
           border-bottom-left-radius: 16px;
           border-bottom-right-radius: 16px;
           margin-bottom: 16px;
+      }
+
+      .map {
+          position: sticky; /* Сохранено для прилипания */
+          top: 80px;
+          z-index: 1;
+          height: calc(100vh - 80px);
+          background: red;
       }
 
       .list-container {
@@ -58,13 +70,21 @@
 
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 160px;
       }
 
       .list-item {
           width: 100%;
           height: 100px;
           background: #E1E5F2;
+      }
+
+      .main {
+          position: relative;
+          z-index: 5;
+          width: 100%;
+          top: -160px;
+          margin-bottom: -160px;
       }
   </style>
 </head>
@@ -78,34 +98,14 @@
         <div class="tipa-cian-header">
           типа циан хэдер
         </div>
-        <div>
-          <img src="https://images.unsplash.com/photo-1542736705-53f0131d1e98?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" height="200" style="display:block; margin: 0 auto; aspect-ratio: 3/2;" alt="">
-        </div>
+      </div>
+      <div class="map" id="map">
+
       </div>
 
       <div class="main">
         <div class="list-container">
           <ul class="list">
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
-            <li class="list-item"></li>
             <li class="list-item"></li>
             <li class="list-item"></li>
             <li class="list-item"></li>
@@ -122,5 +122,23 @@
     </div>
   </div>
 
+  <script type="text/javascript">
+      // Функция ymaps.ready() будет вызвана, когда
+      // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+      ymaps.ready(init);
+      function init(){
+          // Создание карты.
+          var myMap = new ymaps.Map("map", {
+              // Координаты центра карты.
+              // Порядок по умолчанию: «широта, долгота».
+              // Чтобы не определять координаты центра карты вручную,
+              // воспользуйтесь инструментом Определение координат.
+              center: [55.76, 37.64],
+              // Уровень масштабирования. Допустимые значения:
+              // от 0 (весь мир) до 19.
+              zoom: 7
+          });
+      }
+  </script>
 </div>
 </html>
